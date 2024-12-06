@@ -1,11 +1,16 @@
 body {
     background-color: #d698f2;
+    height: 500%;
+    width: 100%;
+    face: Arial
 }
 
 .logo {
     background: #9a39c6;
     height: 80px;
     width: 100%;
+    padding: 0;
+    margin: 0;
     position: fixed;
     display: flex;
     align-items: center;

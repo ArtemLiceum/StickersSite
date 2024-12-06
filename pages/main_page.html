@@ -10,7 +10,9 @@
 <header>
     <div class="logo">
         <img src="imgs/logo.gif" alt="логотип" height="80px" width="80px">
+
         <nav>
+            <a href="main_page.html"><h2>Главная</h2></a>
             <a id="catalog-link" onmouseover="showMenu()" onmouseout="scheduleHideMenu()"><h2>Каталог</h2></a>
             <a href="#"><h2>Корзина</h2></a>
             <a href="#"><h2>Войти</h2></a>
@@ -52,7 +54,6 @@
         </div>
     </div>
 </header>
-
 <script>
     const dropdownMenu = document.getElementById("dropdown-menu");
     let hideTimeout;
@@ -72,5 +73,21 @@
         clearTimeout(hideTimeout); // Отменить запланированное скрытие при наведении на меню
     }
 </script>
+<main>
+    <div>
+        <img src="imgs/welcome.gif" alt="добро пожаловать" height="400px" width="100%">
+        <h1><font size="7">О Компании</font></h1>
+        <p><font size="5">Компания «Наклейки за копейки» предоставляет услуги по производству виниловых наклеек (плёнка ПВХ) оптом и в розницу.
+            Работаем без посредников. Собственные производственные цеха с полным комплексом оборудования.</font></p>
+        <h1><font size="7">Контакты</font></h1>
+        <p><font size="5"><b>«Наклейки за Копейки»</b></font></p>
+        <p><font size="4">Наш адрес: г. Курск, ул. Литовская, 41</font></p>
+        <p><font size="4">Телефон: +7 (4712) 220-578</font></p>
+
+        <p><font size="4">Инстаграм: @Nakleykiz</font></p>
+        <p><font size="4">ВКонтакте: @Nakleykiz</font></p>
+
+    </div>
+</main>
 </body>
 </html>
