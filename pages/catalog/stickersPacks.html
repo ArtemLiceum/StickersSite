@@ -2,9 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <title>Наклейки за копейки</title>
+
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <img src="../imgs/logo.gif" alt="логотип" height="80px" width="80px">
+            <nav>
+                <a href="../main_page.html"><h2>Главная</h2></a>
+                <a id="catalog-link" onmouseover="showMenu()" onmouseout="scheduleHideMenu()"><h2>Каталог</h2></a>
+                <a href="#"><h2>Корзина</h2></a>
+                <a href="#"><h2>Войти</h2></a>
+            </nav>
+            <div class="dropdown-menu" id="dropdown-menu"
+                 onmouseover="keepMenuVisible()" onmouseout="scheduleHideMenu()">
+                <ul>
+                    <li>Наклейки
+                        <ul>
+                            <li>Стикерпаки</li>
+                            <li>Автомобильные наклейки</li>
+                            <li>Интерьерные наклейки</li>
+                            <li>3D стикеры</li>
+                        </ul>
+                    </li>
+                    <li>Акриловая продукция
+                        <ul>
+                            <li>Фигурки</li>
+                            <li>Брелки</li>
+                            <li>Значки</li>
+                        </ul>
+                    </li>
+                    <li>Для банковских карт
+                        <ul>
+                            <li>Наклейки на банковские карты</li>
+                            <li>Голографические наклейки на банковские карты</li>
+                            <li>Картхолдеры</li>
+                        </ul>
+                    </li>
+                    <li>Прочее
+                        <ul>
+                            <li>Наклейки с пленкой для переноса</li>
+                            <li>Слайдеры на ногти</li>
+                            <li>Обложки на паспорт</li>
+                            <li>Тканевые баннеры</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <script>
+        const dropdownMenu = document.getElementById("dropdown-menu");
+        let hideTimeout;
 
+        function showMenu() {
+            clearTimeout(hideTimeout); // Отменить запланированное скрытие
+            dropdownMenu.style.display = "block";
+        }
+
+        function scheduleHideMenu() {
+            hideTimeout = setTimeout(() => {
+                dropdownMenu.style.display = "none";
+            }, 300); // Задержка перед скрытием, чтобы пользователь успел навести на меню
+        }
+
+        function keepMenuVisible() {
+            clearTimeout(hideTimeout); // Отменить запланированное скрытие при наведении на меню
+        }
+    </script>
+    <main>
+        <div class="container">
+            <div class="card">
+                <img src="../imgs/stickerPacks1.gif" alt="Product Image">
+                <h3>Стикерпак </h3>
+                <p>238 руб.</p>
+                <button>В корзину</button>
+            </div>
+            <div class="card">
+                <img src="../imgs/stickerPacks2.gif" alt="Product Image">
+                <h3>Стикерпак </h3>
+                <p>214 руб.</p>
+                <button>В корзину</button>
+            </div>
+            <div class="card">
+                <img src="../imgs/stickerPacks3.gif" alt="Product Image">
+                <h3>Стикерпак </h3>
+                <p>251 руб.</p>
+                <button>В корзину</button>
+            </div>
+            <div class="card">
+                <img src="../imgs/stickerPacks4.gif" alt="Product Image">
+                <h3>Product Name 4</h3>
+                <p>$35.00</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="../imgs/stickerPacks5.gif" alt="Product Image">
+                <h3>Product Name 4</h3>
+                <p>$35.00</p>
+                <button>Add to Cart</button>
+            </div>
+            <div class="card">
+                <img src="../imgs/stickerPacks6.gif" alt="Product Image">
+                <h3>Product Name 4</h3>
+                <p>$35.00</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
