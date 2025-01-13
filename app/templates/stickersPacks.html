@@ -77,7 +77,7 @@
         <div class="container">
             {% for product in products %}
             <div class="card">
-                <img src="{{ product.img }}" alt="{{ product.name }}">
+                <img src="{{ url_for('static', filename=product.img) }}" alt="{{ product.name }}">
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.price }} руб.</p>
                 <button class="add-to-card" data-product-id="{{ product.id }}">В корзину</button>
