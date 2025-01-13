@@ -6,8 +6,7 @@ bp = Blueprint('site', __name__)
 
 @bp.route('/site')
 def main_page():
-    products = Product.query.all()
-    return render_template('main_page.html', products=products)
+    return render_template('main_page.html')
 
 @bp.route('/site/stickersPacks')
 def stickerPacks():
