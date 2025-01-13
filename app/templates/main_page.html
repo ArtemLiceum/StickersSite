@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Наклейки за копейки</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
 <body>
 <header>
     <div class="logo">
-        <img src="imgs/logo.gif" alt="логотип" height="80px" width="80px">
+        <img src="{{ url_for('static', filename='imgs/logo.gif') }}" alt="логотип" height="80px" width="80px">
 
         <nav>
-            <a href="main_page.html"><h2>Главная</h2></a>
+            <a href="{{ url_for('site.main_page') }}"><h2>Главная</h2></a>
             <a id="catalog-link" onmouseover="showMenu()" onmouseout="scheduleHideMenu()"><h2>Каталог</h2></a>
             <a href="#"><h2>Корзина</h2></a>
             <a href="#"><h2>Войти</h2></a>
@@ -22,7 +23,7 @@
             <ul>
                 <li>Наклейки
                     <ul>
-                        <li><a href="catalog/stickersPacks.html">Стикерпаки</a></li>
+                        <li><a href="{{ url_for('site.stickerPacks') }}">Стикерпаки</a></li>
                         <li>Автомобильные наклейки</li>
                         <li>Интерьерные наклейки</li>
                         <li>3D стикеры</li>
@@ -75,7 +76,7 @@
 </script>
 <main>
     <div>
-        <img src="imgs/welcome.gif" alt="добро пожаловать" height="400px" width="100%">
+        <img src="{{ url_for('static', filename='imgs/welcome.gif') }}" alt="добро пожаловать" height="400px" width="100%">
         <h1><font size="7">О Компании</font></h1>
         <p><font size="5">Компания «Наклейки за копейки» предоставляет услуги по производству виниловых наклеек (плёнка ПВХ) оптом и в розницу.
             Работаем без посредников. Собственные производственные цеха с полным комплексом оборудования.</font></p>

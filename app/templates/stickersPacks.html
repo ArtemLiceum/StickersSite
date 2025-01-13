@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <title>Наклейки за копейки</title>
 
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="../imgs/logo.gif" alt="логотип" height="80px" width="80px">
+            <img src="{{ url_for('static', filename='imgs/logo.gif') }}" alt="логотип" height="80px" width="80px">
             <nav>
-                <a href="../main_page.html"><h2>Главная</h2></a>
+                <a href="{{ url_for('site.main_page') }}"><h2>Главная</h2></a>
                 <a id="catalog-link" onmouseover="showMenu()" onmouseout="scheduleHideMenu()"><h2>Каталог</h2></a>
                 <a href="#"><h2>Корзина</h2></a>
                 <a href="#"><h2>Войти</h2></a>
@@ -75,42 +75,14 @@
     </script>
     <main>
         <div class="container">
+            {% for product in products %}
             <div class="card">
-                <img src="../imgs/stickerPacks1.gif" alt="Product Image">
-                <h3>Стикерпак </h3>
-                <p>238 руб.</p>
-                <button>В корзину</button>
+                <img src="{{ product.img }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.price }} руб.</p>
+                <button class="add-to-card" data-product-id="{{ product.id }}">В корзину</button>
             </div>
-            <div class="card">
-                <img src="../imgs/stickerPacks2.gif" alt="Product Image">
-                <h3>Стикерпак </h3>
-                <p>214 руб.</p>
-                <button>В корзину</button>
-            </div>
-            <div class="card">
-                <img src="../imgs/stickerPacks3.gif" alt="Product Image">
-                <h3>Стикерпак </h3>
-                <p>251 руб.</p>
-                <button>В корзину</button>
-            </div>
-            <div class="card">
-                <img src="../imgs/stickerPacks4.gif" alt="Product Image">
-                <h3>Product Name 4</h3>
-                <p>$35.00</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="card">
-                <img src="../imgs/stickerPacks5.gif" alt="Product Image">
-                <h3>Product Name 4</h3>
-                <p>$35.00</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="card">
-                <img src="../imgs/stickerPacks6.gif" alt="Product Image">
-                <h3>Product Name 4</h3>
-                <p>$35.00</p>
-                <button>Add to Cart</button>
-            </div>
+            {% endfor %}
         </div>
     </main>
 </body>
