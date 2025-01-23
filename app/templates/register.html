@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Наклейки за копейки</title>
+    <title>Регистрация</title>
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
                 <a href="{{ url_for('site.main_page') }}"><h2>Главная</h2></a>
                 <a id="catalog-link" onmouseover="showMenu()" onmouseout="scheduleHideMenu()"><h2>Каталог</h2></a>
                 <a href="#"><h2>Корзина</h2></a>
-                <a href="#"><h2>Войти</h2></a>
+                <a href="{{ url_for('login.login') }}"><h2>Войти</h2></a>
             </nav>
             <div class="dropdown-menu" id="dropdown-menu"
                  onmouseover="keepMenuVisible()" onmouseout="scheduleHideMenu()">
@@ -74,17 +74,20 @@
     </script>
     <main>
         <div class="login-form">
-            <h1>Вход</h1>
-            <form method="POST" action="{{ url_for('login.login') }}">
+            <h1>Регистрация</h1>
+            <form method="POST" action="{{ url_for('login.register') }}">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required><br><br>
 
                 <label for="password">Пароль:</label>
                 <input type="password" id="password" name="password" required><br><br>
 
-                <button type="submit">Войти</button>
+                <label for="confirm_password">Подтвердите пароль:</label>
+                <input type="password" id="confirm_password" name="confirm_password" required><br><br>
+
+                <button type="submit">Зарегистрироваться</button>
             </form>
-            <p>Нет аккаунта? <a href="{{ url_for('login.register') }}">Зарегистрируйтесь</a></p>
+            <p>Уже есть аккаунт? <a href="{{ url_for('login.login') }}">Войдите</a></p>
         </div>
     </main>
 </body>
