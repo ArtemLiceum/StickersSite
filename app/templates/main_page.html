@@ -16,7 +16,7 @@
             <a href="{{ url_for('site.main_page') }}"><h2>Главная</h2></a>
             <a id="catalog-link" onmouseover="showMenu()" onmouseout="scheduleHideMenu()"><h2>Каталог</h2></a>
             <a href="#"><h2>Корзина</h2></a>
-            <a href="#"><h2>Войти</h2></a>
+            <a href="{{ url_for('login.login') }}"><h2>Войти</h2></a>
         </nav>
         <div class="dropdown-menu" id="dropdown-menu"
              onmouseover="keepMenuVisible()" onmouseout="scheduleHideMenu()">
