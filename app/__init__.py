@@ -22,9 +22,10 @@ def create_app():
 
     Swagger(app)
 
-    from .routes import dashboard, seed, site
+    from .routes import dashboard, seed, site, login
     app.register_blueprint(seed.bp)
     app.register_blueprint(dashboard.bp)
     app.register_blueprint(site.bp)
+    app.register_blueprint(login.bp)
 
     return app

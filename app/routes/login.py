@@ -1,9 +1,13 @@
 from flask import session, Blueprint, request, redirect, url_for, render_template, flash
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
 from app.models import User
 
-# Импортируйте ваши модели и другие необходимые модули
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 bp = Blueprint('login', __name__)
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -27,6 +31,13 @@ def login():
 
     # Если метод GET, просто отображаем форму
     return render_template('login.html')
+
+@bp.route('/profile')
+@login_required
+def profile():
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
+    return render_template('profile.html', user=user)
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
