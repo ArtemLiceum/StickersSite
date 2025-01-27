@@ -7,7 +7,11 @@
             <img src="{{ url_for('static', filename=product.img) }}" alt="{{ product.name }}">
             <h3>{{ product.name }}</h3>
             <p>{{ product.price }} руб.</p>
-            <button class="add-to-card" data-product-id="{{ product.id }}">В корзину</button>
+            {% if current_user.is_authenticated %}
+                <form action="{{ url_for('site.add_to_cart', product_id=product.id) }}" method="POST">
+                    <button type="submit" class="add-to-card">В корзину</button>
+                </form>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
