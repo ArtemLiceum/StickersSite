@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Оформление заказа</h1>
+    <form method="POST">
+        <label for="address">Адрес доставки:</label>
+        <input type="text" id="address" name="address" required>
+        <button type="submit">Подтвердить заказ</button>
+    </form>
+{% endblock %}
