@@ -1,15 +1,20 @@
-from datetime import datetime
-from enum import Enum
 from app import db
+from flask_login import UserMixin
+from datetime import datetime
 
 
-class TransactionStatus(Enum):
-    PENDING = "pending"
-    CONFIRMED = "confirmed"
-    CANCELED = "canceled"
-    EXPIRED = "expired"
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    products = db.Column(db.Text, nullable=False)  # Список товаров в JSON-формате
+    total_amount = db.Column(db.Float, nullable=False)
+    address = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-class User(db.Model):
+    user = db.relationship('User', backref='orders', lazy=True)
+
+
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, unique=True)
@@ -35,10 +40,6 @@ class Product(db.Model):
 
 
 class Basket(db.Model):
-    """
-    - Поле user_id хранит id юзера
-    -
-    """
     __tablename__ = 'basket'
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', onupdate="NO ACTION", ondelete="NO ACTION"), primary_key=True, unique=True)
