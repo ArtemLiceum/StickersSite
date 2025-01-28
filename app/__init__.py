@@ -23,7 +23,7 @@ def create_app():
     migrate.init_app(app, db)
 
     login_manager.init_app(app)
-    login_manager.login_view = 'site.login'
+    login_manager.login_view = 'log.login'
 
     Swagger(app)
 
