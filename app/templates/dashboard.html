@@ -51,6 +51,44 @@
         <option value="30" {% if refresh_interval == 30 %}selected{% endif %}>30 Seconds</option>
         <option value="60" {% if refresh_interval == 60 %}selected{% endif %}>1 Minute</option>
     </select>
+    <div>
+    <h3>Изменение баланса пользователя</h3>
+    <form id="updateBalanceForm">
+        <label for="user_id">ID пользователя:</label>
+        <input type="number" id="user_id" name="user_id" required>
+        <label for="balance">Новый баланс:</label>
+        <input type="number" step="0.01" id="balance" name="balance" required>
+        <button type="submit">Обновить баланс</button>
+    </form>
+    <div id="balanceMessage"></div>
+</div>
+
+<script>
+    document.getElementById('updateBalanceForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const user_id = document.getElementById('user_id').value;
+        const balance = document.getElementById('balance').value;
+
+        fetch('/admin/update_balance', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id, balance }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById('balanceMessage').textContent = 'Ошибка: ' + data.error;
+            } else {
+                document.getElementById('balanceMessage').textContent = 'Успех: ' + data.message + '. Новый баланс: ' + data.balance;
+            }
+        })
+        .catch(error => {
+            document.getElementById('balanceMessage').textContent = 'Ошибка: ' + error;
+        });
+    });
+</script>
     <div class="container">
         <table class="orders-table">
             <thead>

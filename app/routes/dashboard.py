@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, session, jsonify, request
+from flask_login import current_user, login_required
 from app.models import User, Order, Product
 from app import db
 import json
@@ -11,7 +12,8 @@ def dashboard():
     total_users = User.query.count()
     total_orders = Order.query.count()
     total_orders_amount = Order.query.with_entities(db.func.sum(Order.total_amount)).scalar()
-    refresh_interval = session.get('refresh_interval', 10)
+
+    refresh_interval = 0  # session.get('refresh_interval', 10)
 
     orders = Order.query.all()
     orders_with_details = []
@@ -47,6 +49,26 @@ def dashboard():
                            refresh_interval=refresh_interval
                            )
 
+@bp.route('/admin/update_balance', methods=['POST'])
+@login_required
+def update_balance():
+    user_id = request.json.get('user_id')
+    new_balance = request.json.get('balance')
+
+    if not user_id or not new_balance:
+        return jsonify({'error': 'Не указан user_id или balance'}), 400
+
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({'error': 'Пользователь не найден'}), 404
+
+    try:
+        user.balance = float(new_balance)
+        db.session.commit()
+        return jsonify({'message': 'Баланс обновлен', 'balance': user.balance})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 @bp.route('/admin/set_refresh_interval', methods=['POST'])
 def set_refresh_interval():

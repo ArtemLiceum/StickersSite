@@ -120,20 +120,33 @@ def checkout():
                     'quantity': item['quantity']
                 })
 
-        # Создаем новый заказ
-        new_order = Order(
-            user_id=current_user.id,
-            products=json.dumps(order_items),
-            total_amount=total_amount,
-            address=address
-        )
-        db.session.add(new_order)
+        # Проверяем, достаточно ли средств у пользователя
+        if current_user.balance < total_amount:
+            flash('Недостаточно средств на балансе', 'error')
+            return redirect(url_for('site.cart'))
 
-        # Очищаем корзину
-        basket.products_id = json.dumps([])
-        db.session.commit()
+        try:
+            # Создаем новый заказ
+            new_order = Order(
+                user_id=current_user.id,
+                products=json.dumps(order_items),
+                total_amount=total_amount,
+                address=address
+            )
+            db.session.add(new_order)
 
-        flash(f'Заказ успешно оформлен на сумму {total_amount} руб.!', 'success')
-        return redirect(url_for('site.main_page'))
+            # Списание средств с баланса пользователя
+            current_user.balance -= total_amount
+
+            # Очищаем корзину
+            basket.products_id = json.dumps([])
+            db.session.commit()
+
+            flash(f'Заказ успешно оформлен на сумму {total_amount} руб.!', 'success')
+            return redirect(url_for('site.main_page'))
+        except Exception as e:
+            db.session.rollback()
+            flash('Произошла ошибка при оформлении заказа', 'error')
+            return redirect(url_for('site.cart'))
 
     return render_template('checkout.html')
