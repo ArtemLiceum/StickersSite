@@ -26,34 +26,38 @@
             <div class="dropdown-menu" id="dropdown-menu"
                  onmouseover="keepMenuVisible()" onmouseout="scheduleHideMenu()">
                 <ul>
+                    <li>Новинки
+                    <li>Популярное
+                    <li><a href="{{ url_for('site.generate_sticker_route') }}">Сгенерировать наклейку</a>
                     <li>Наклейки
                         <ul>
-                            <li><a href="{{ url_for('site.catalog', category='Стикерпак') }}">Стикерпаки</a></li>
-                            <li>Автомобильные наклейки</li>
-                            <li>Интерьерные наклейки</li>
-                            <li>3D стикеры</li>
+                            <li><a href="{{ url_for('site.catalog', category='AI') }}">AI</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Стикерпаки') }}">Стикерпаки</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Автомобильные наклейки') }}">Автомобильные наклейки</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Интерьерные наклейки') }}">Интерьерные наклейки</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='3D стикеры') }}">3D стикеры</a></li>
                         </ul>
                     </li>
                     <li>Акриловая продукция
                         <ul>
-                            <li>Фигурки</li>
-                            <li><a href="{{ url_for('site.catalog', category='Брелок') }}">Брелоки</a></li>
-                            <li>Значки</li>
+                            <li><a href="{{ url_for('site.catalog', category='Фигурки') }}">Фигурки</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Брелоки') }}">Брелоки</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Значки') }}">Значки</a></li>
                         </ul>
                     </li>
                     <li>Для банковских карт
                         <ul>
-                            <li>Наклейки на банковские карты</li>
-                            <li>Голографические наклейки на банковские карты</li>
-                            <li>Картхолдеры</li>
+                            <li><a href="{{ url_for('site.catalog', category='Наклейки на банковские карты') }}">Наклейки на банковские карты</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Голографические наклейки на банковские карты') }}">Голографические наклейки на банковские карты</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Картхолдеры') }}">Картхолдеры</a></li>
                         </ul>
                     </li>
                     <li>Прочее
                         <ul>
-                            <li>Наклейки с пленкой для переноса</li>
-                            <li>Слайдеры на ногти</li>
+                            <li><a href="{{ url_for('site.catalog', category='Наклейки с пленкой для переноса') }}">Наклейки с пленкой для переноса</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Слайдеры на ногти') }}">Слайдеры на ногти</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Обложки на паспорт') }}">Обложки на паспорт</a></li>
-                            <li>Тканевые баннеры</li>
+                            <li><a href="{{ url_for('site.catalog', category='Тканевые баннеры') }}">Тканевые баннеры</a></li>
                         </ul>
                     </li>
                 </ul>
