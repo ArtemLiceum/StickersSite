@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Ваша наклейка</h2>
+<img src="{{ url_for('static', filename=sticker.image_url) }}" alt="Сгенерированная наклейка">
+<p>{{ sticker.description }}</p>
+<form method="POST" action="{{ url_for('site.add_sticker_to_cart', sticker_id=sticker.id) }}">
+    <button type="submit">Добавить в корзину</button>
+</form>
+
+    <div class="card">
+        <img src="{{ url_for('static', filename=sticker.img) }}" alt="{{ sticker.name }}">
+        <h3>{{ sticker.name }}</h3>
+        <p>{{ sticker.price }} руб.</p>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('site.add_to_cart', product_id=sticker.id) }}" method="POST">
+                <button type="submit" class="add-to-card">В корзину</button>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

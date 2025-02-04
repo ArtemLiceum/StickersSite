@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Создать наклейку</h2>
+<form method="POST" action="{{ url_for('site.generate_sticker_route') }}">
+    <label for="description">Описание:</label>
+    <textarea id="description" name="description" rows="4" cols="50" required></textarea>
+    <button type="submit">Сгенерировать</button>
+</form>
+{% endblock %}
