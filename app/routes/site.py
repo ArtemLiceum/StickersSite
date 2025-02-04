@@ -1,8 +1,12 @@
 from flask import Blueprint, request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
+from unicodedata import category
+
 from app import db
-from app.models import Product, Basket, Order
+from app.models import Product, Basket, Order, Sticker
+from ..utils import generate_sticker
 import json
+import random
 
 bp = Blueprint('site', __name__)
 
@@ -38,6 +42,37 @@ def add_to_cart(product_id):
     else:
         # Если товара нет, добавляем его
         products.append({'id': product_id, 'quantity': 1})
+
+    # Обновляем корзину
+    basket.products_id = json.dumps(products)
+    db.session.commit()
+
+    flash('Товар добавлен в корзину!', 'success')
+    return redirect(url_for('site.catalog', category=product.category))
+
+@bp.route('/add_sticker_to_cart/<int:sticker_id>', methods=['POST'])
+@login_required
+def add_sticker_to_cart(sticker_id):
+    product = Product.query.get_or_404(sticker_id)
+    basket = Basket.query.filter_by(user_id=current_user.id).first()
+
+    if not basket:
+        # Если корзины нет, создаем новую
+        basket = Basket(user_id=current_user.id, products_id=json.dumps([]))
+        db.session.add(basket)
+
+    # Получаем текущий список товаров
+    products = json.loads(basket.products_id)
+
+    # Проверяем, есть ли товар уже в корзине
+    product_in_cart = next((item for item in products if item['id'] == sticker_id), None)
+
+    if product_in_cart:
+        # Если товар уже в корзине, увеличиваем количество
+        product_in_cart['quantity'] += 1
+    else:
+        # Если товара нет, добавляем его
+        products.append({'id': sticker_id, 'quantity': 1})
 
     # Обновляем корзину
     basket.products_id = json.dumps(products)
@@ -150,3 +185,35 @@ def checkout():
             return redirect(url_for('site.cart'))
 
     return render_template('checkout.html')
+
+@bp.route('/generate_sticker', methods=['GET', 'POST'])
+@login_required
+def generate_sticker_route():
+    if request.method == 'POST':
+        description = str(request.form.get('description'))
+        if not description:
+            flash('Введите описание для генерации наклейки', 'error')
+            return redirect(url_for('site.generate_sticker_route'))
+
+        # Генерация наклейки
+        image_path = generate_sticker(description)
+        if not image_path:
+            flash('Ошибка при генерации наклейки', 'error')
+            return redirect(url_for('site.generate_sticker_route'))
+        print(image_path)
+        img = '/'.join(image_path.split('/')[-2:])
+        print(img)
+        # Сохранение наклейки в базу данных
+        new_sticker = Product(
+            name=description,
+            price=random.randint(150, 200),
+            img = img,
+            category = 'AI'
+        )
+        db.session.add(new_sticker)
+        db.session.commit()
+
+        flash('Наклейка успешно сгенерирована!', 'success')
+        return render_template('sticker_preview.html', sticker=new_sticker)
+
+    return render_template('generate_sticker.html')
