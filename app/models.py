@@ -49,3 +49,19 @@ class Basket(db.Model):
 
     def __repr__(self):
         return f"<Basket user_id={self.user_id} products_id={self.products_id}>"
+
+
+class Sticker(db.Model):
+    __tablename__ = 'stickers'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    description = db.Column(db.String(500), nullable=False)  # Описание для генерации
+    image_url = db.Column(db.String(500), nullable=False)    # Ссылка на сгенерированное изображение
+    price = db.Column(db.Float, nullable=False, default=100) # Цена наклейки
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)  # Кто создал
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship('User', backref='stickers')
+
+    def __repr__(self):
+        return f"<Sticker id={self.id} description={self.description}>"

@@ -26,8 +26,8 @@
             <div class="dropdown-menu" id="dropdown-menu"
                  onmouseover="keepMenuVisible()" onmouseout="scheduleHideMenu()">
                 <ul>
-                    <li>Новинки
-                    <li>Популярное
+                    <li><a href="{{ url_for('site.catalog', category='Популярное') }}">Популярное</a></li>
+                    <li><a href="{{ url_for('site.catalog', category='Новинки') }}">Новинки</a></li>
                     <li><a href="{{ url_for('site.generate_sticker_route') }}">Сгенерировать наклейку</a>
                     <li>Наклейки
                         <ul>
@@ -48,7 +48,7 @@
                     <li>Для банковских карт
                         <ul>
                             <li><a href="{{ url_for('site.catalog', category='Наклейки на банковские карты') }}">Наклейки на банковские карты</a></li>
-                            <li><a href="{{ url_for('site.catalog', category='Голографические наклейки на банковские карты') }}">Голографические наклейки на банковские карты</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Голографические наклейки') }}">Голографические наклейки</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Картхолдеры') }}">Картхолдеры</a></li>
                         </ul>
                     </li>
@@ -57,7 +57,7 @@
                             <li><a href="{{ url_for('site.catalog', category='Наклейки с пленкой для переноса') }}">Наклейки с пленкой для переноса</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Слайдеры на ногти') }}">Слайдеры на ногти</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Обложки на паспорт') }}">Обложки на паспорт</a></li>
-                            <li><a href="{{ url_for('site.catalog', category='Тканевые баннеры') }}">Тканевые баннеры</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Постеры') }}">Постеры</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -93,6 +93,7 @@
                     </div>
                 {% endfor %}
             {% endif %}
+
         {% endwith %}
 
         {% block content %}{% endblock %}

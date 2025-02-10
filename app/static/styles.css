@@ -1,5 +1,13 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: Georgia, serif;
+}
+
+body {
+    /*font-family: Verdana, sans-serif;*/
     margin: 0;
     padding: 0;
     background-color: #d698f2;
@@ -60,7 +68,7 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
     display: none;
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 6%;
     background: #9a39c6;
     color: #2a0839;
     padding: 10px;
@@ -74,6 +82,7 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
     list-style: none;
     margin: 0;
     padding: 0;
+    font-size: 18px;
 }
 
 .dropdown-menu ul > li > a {
@@ -106,15 +115,18 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: calc(30% - 20px);
+    height: 530px;
     text-align: center;
     padding: 12px;
 }
 
 .card img {
     width: 100%;
-    height: auto;
+    height: 80%; /* Фиксированная высота для всех изображений */
+    object-fit: cover; /* Сохраняет пропорции и обрезает изображение */
     border-radius: 4px;
     margin-bottom: 8px;
+    overflow: hidden; /* Обрезает часть изображения, выходящую за пределы контейнера */
 }
 
 .card h3 {
@@ -159,8 +171,8 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
 main {
     padding-top: 100px; /* Отступ сверху, чтобы контент не перекрывался шапкой */
     padding-bottom: 20px; /* Отступ снизу */
-    width: 100%;
-    max-width: 1200px;
+    width: 85%;
+    /* max-width: 1200px; */
     margin: 0 auto; /* Центрирование контента */
 }
 
@@ -283,4 +295,107 @@ main {
 
 .orders-table th {
     background-color: #f2f2f2;
+}
+
+
+.login-form textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    resize: vertical; /* Позволяет изменять высоту текстового поля */
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #9a39c6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #7a2a9e;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #9a39c6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #7a2a9e;
+}
+
+.btn-danger {
+    background-color: #c0392b;
+}
+
+.btn-danger:hover {
+    background-color: #922b21;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background: white;
+}
+
+.cart-item img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.orders-table th, .orders-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: #f4f4f4;
+}
+
+.order-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
 }
