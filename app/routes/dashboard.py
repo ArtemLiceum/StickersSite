@@ -13,6 +13,8 @@ def dashboard():
     total_orders = Order.query.count()
     total_orders_amount = Order.query.with_entities(db.func.sum(Order.total_amount)).scalar()
 
+    users = User.query.all()
+
     refresh_interval = 0  # session.get('refresh_interval', 10)
 
     orders = Order.query.all()
@@ -46,7 +48,8 @@ def dashboard():
                            total_users=total_users,
                            total_orders=total_orders,
                            total_orders_amount=total_orders_amount,
-                           refresh_interval=refresh_interval
+                           users=users,
+                           refresh_interval=refresh_interval,
                            )
 
 @bp.route('/admin/update_balance', methods=['POST'])

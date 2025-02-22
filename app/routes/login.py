@@ -17,10 +17,9 @@ def login():
 
         if user and check_password_hash(user.password, password):
             login_user(user)
-            # flash('Вы успешно вошли в систему!', 'success')
             return redirect(url_for('site.main_page'))
         else:
-            # flash('Неверный email или пароль', 'error')
+            flash('Неверный email или пароль', 'error')
             return redirect(url_for('log.login'))
 
     return render_template('login.html')
@@ -33,12 +32,12 @@ def register():
         confirm_password = request.form.get('confirm_password')
 
         if password != confirm_password:
-            # flash('Пароли не совпадают', 'error')
+            flash('Пароли не совпадают', 'error')
             return redirect(url_for('log.register'))
 
         existing_user = User.query.filter_by(email=email).first()
         if existing_user:
-            # flash('Пользователь с таким email уже существует', 'error')
+            flash('Пользователь с таким email уже существует', 'error')
             return redirect(url_for('log.register'))
 
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
@@ -46,7 +45,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
-        # flash('Регистрация прошла успешно! Теперь вы можете войти.', 'success')
+        flash('Регистрация прошла успешно! Теперь вы можете войти.', 'success')
         return redirect(url_for('log.login'))
 
     return render_template('register.html')

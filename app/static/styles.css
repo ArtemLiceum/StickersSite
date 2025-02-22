@@ -1,18 +1,23 @@
-body {
+/* body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
 h1, h2, h3 {
     font-family: Georgia, serif;
-}
+}*/
 
 body {
-    /*font-family: Verdana, sans-serif;*/
+    font-family: 'Comfortaa', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #d698f2;
     height: 500%;
     width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Comfortaa', Arial, sans-serif;
+    color: #2a0839;
 }
 
 .logo {
@@ -27,6 +32,11 @@ body {
     z-index: 1000;
 }
 
+.main img {
+    border-corner-shape: bevel;
+    border-radius: 40px;
+}
+
 .logo img {
     margin-left: 10px;
 }
@@ -35,7 +45,8 @@ nav {
     margin-left: auto;
     margin-right: 20px;
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 20px;
 }
 
 nav a {
@@ -44,10 +55,19 @@ nav a {
     margin: 0 10px;
     cursor: pointer;
     position: relative;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
 }
 
 nav a:hover {
     text-decoration: underline;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+nav a:not(:last-child) {
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    padding-right: 20px;
 }
 
 .dropdown-menu a {
@@ -67,22 +87,25 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
 .dropdown-menu {
     display: none;
     position: absolute;
+    font-size: 18px;
     top: 100%;
-    right: 6%;
+    right: 20%;
     background: #9a39c6;
     color: #2a0839;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
     z-index: 1001;
 }
 
 .dropdown-menu ul {
     list-style: none;
+    color: #ffffff;
     margin: 0;
     padding: 0;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .dropdown-menu ul > li > a {
@@ -92,12 +115,28 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
 
 .dropdown-menu ul > li ul {
     margin-left: 15px;
+    padding-left: 10px;
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .dropdown-menu ul > li > ul > li:hover {
     text-decoration: underline;
     font-weight: bold;
 }
+
+nav {
+    margin-left: auto;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 
 .container {
     max-width: 1200px;
@@ -115,7 +154,7 @@ nav a:active, nav a:focus, .dropdown-menu a:active, .dropdown-menu a:focus {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: calc(30% - 20px);
-    height: 530px;
+    height: 550px;
     text-align: center;
     padding: 12px;
 }

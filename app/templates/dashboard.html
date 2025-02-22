@@ -42,6 +42,12 @@
     <p>Total Orders: {{ total_orders }}</p>
     <p>Total Orders Amount: {{ total_orders_amount }}</p>
 
+    <h1>Users</h1>
+    <p>ID - email - balance</p>
+    {% for user in users %}
+        <p>{{ user.id }} - {{ user.email }} - {{ user.balance }}</p>
+    {% endfor %}
+
     <!-- Управление интервалом автообновления -->
     <h2>Refresh Interval</h2>
     <select onchange="updateRefreshInterval(this.value)">

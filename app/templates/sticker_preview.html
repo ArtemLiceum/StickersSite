@@ -2,11 +2,11 @@
 
 {% block content %}
 <main>
+    <h1 style="text-align: center;">Ваша наклейка</h1>
     <div class="container">
-        <div class="card">
-            <h2>Ваша наклейка</h2>
-            <img src="{{ url_for('static', filename=sticker.image_url) }}" alt="Сгенерированная наклейка">
-            <p>{{ sticker.description }}</p>
+        <div class="card" style="align: center;">
+            <img src="{{ url_for('static', filename=sticker.img) }}" alt="Сгенерированная наклейка">
+            <p>{{ sticker.price }} руб.</p>
             <form method="POST" action="{{ url_for('site.add_sticker_to_cart', sticker_id=sticker.id) }}">
                 <button type="submit" class="add-to-card">Добавить в корзину</button>
             </form>

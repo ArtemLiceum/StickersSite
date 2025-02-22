@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Наклейки за копейки</title>
+        <link rel="icon" type="image/gif" href="{{ url_for('static', filename='imgs/logo.gif') }}">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     </head>
     <body>
     <header>
@@ -26,9 +27,6 @@
             <div class="dropdown-menu" id="dropdown-menu"
                  onmouseover="keepMenuVisible()" onmouseout="scheduleHideMenu()">
                 <ul>
-                    <li><a href="{{ url_for('site.catalog', category='Популярное') }}">Популярное</a></li>
-                    <li><a href="{{ url_for('site.catalog', category='Новинки') }}">Новинки</a></li>
-                    <li><a href="{{ url_for('site.generate_sticker_route') }}">Сгенерировать наклейку</a>
                     <li>Наклейки
                         <ul>
                             <li><a href="{{ url_for('site.catalog', category='AI') }}">AI</a></li>
@@ -54,6 +52,10 @@
                     </li>
                     <li>Прочее
                         <ul>
+                            <li><a href="{{ url_for('site.generate_sticker_route') }}">Сгенерировать наклейку</a>
+                            <li><a href="{{ url_for('site.upload_sticker_route') }}">Добавить свою наклейку</a>
+                            <li><a href="{{ url_for('site.catalog', category='Новинки') }}">Новинки</a></li>
+                            <li><a href="{{ url_for('site.catalog', category='Популярное') }}">Популярное</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Наклейки с пленкой для переноса') }}">Наклейки с пленкой для переноса</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Слайдеры на ногти') }}">Слайдеры на ногти</a></li>
                             <li><a href="{{ url_for('site.catalog', category='Обложки на паспорт') }}">Обложки на паспорт</a></li>
