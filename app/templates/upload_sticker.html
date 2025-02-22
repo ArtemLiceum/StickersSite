@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <div class="login-form">
+        <h1>Загрузить изображение для стикера</h1>
+        <form method="POST" action="{{ url_for('site.upload_sticker_route') }}" enctype="multipart/form-data">
+            <label for="file">Выберите изображение:</label>
+            <input type="file" id="file" name="file" accept="image/*" required>
+            <button type="submit">Загрузить</button>
+        </form>
+    </div>
+</main>
+{% endblock %}

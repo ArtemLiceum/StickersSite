@@ -1,10 +1,12 @@
+import os
+
 from flask import Blueprint, request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
-from unicodedata import category
+from werkzeug.utils import secure_filename
 
 from app import db
-from app.models import Product, Basket, Order, Sticker
-from ..utils import generate_sticker
+from app.models import Product, Basket, Order
+from ..utils import generate_sticker, allowed_file
 import json
 import random
 
@@ -217,3 +219,51 @@ def generate_sticker_route():
         return render_template('sticker_preview.html', sticker=new_sticker)
 
     return render_template('generate_sticker.html')
+
+
+@bp.route('/upload_sticker', methods=['GET', 'POST'])
+@login_required
+def upload_sticker_route():
+    if request.method == 'POST':
+        # Проверяем, есть ли файл в запросе
+        if 'file' not in request.files:
+            flash('Файл не выбран', 'error')
+            return redirect(request.url)
+
+        file = request.files['file']
+
+        if file.filename == '':
+            flash('Файл не выбран', 'error')
+            return redirect(request.url)
+
+        if file and allowed_file(file.filename): #  Проверка расширения
+            upload_folder = 'app/static/imgs'
+
+            #Проверка на существование папки
+            if not os.path.exists(upload_folder):
+                os.makedirs(upload_folder)
+
+            # Получаем оригинальное имя файла без расширения
+            original_name, _ = os.path.splitext(secure_filename(file.filename))
+            print(original_name, _)
+            # Формируем новое имя файла с расширением .gif
+            filename = f"{original_name}.gif"
+
+            file_path = os.path.join(upload_folder, filename)
+
+            file.save(file_path)
+
+            new_sticker = Product(
+                name=original_name,
+                price=random.randint(150, 200),
+                img=f'imgs/{filename}',
+                category='Пользовательские стикеры',
+            )
+
+            db.session.add(new_sticker)
+            db.session.commit()
+
+            flash('Изображение успешно загружено!', 'success')
+            return render_template('sticker_preview.html', sticker=new_sticker)
+
+    return render_template('upload_sticker.html')
